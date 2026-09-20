@@ -22,13 +22,13 @@ function render(){
  const invested=purchases.reduce((a,x)=>a+x.amount,0),bought=purchases.reduce((a,x)=>a+x.qty,0);
  const uni=purchases.filter(x=>x.server==="Uniplay"),goat=purchases.filter(x=>x.server==="GOAT");
  const uq=uni.reduce((a,x)=>a+x.qty,0),gq=goat.reduce((a,x)=>a+x.qty,0),us=uni.reduce((a,x)=>a+x.amount,0),gs=goat.reduce((a,x)=>a+x.amount,0);
- const out=resales.reduce((a,x)=>a+x.qty,0)+sales.reduce((a,x)=>a+x.qty,0),stock=bought-out;
+ const uniOut=resales.reduce((a,x)=>a+x.qty,0)+sales.filter(x=>x.server==="Uniplay").reduce((a,x)=>a+x.qty,0),goatOut=sales.filter(x=>x.server==="GOAT").reduce((a,x)=>a+x.qty,0); const uniStock=uq-uniOut,goatStock=gq-goatOut,stock=uniStock+goatStock;
  const rr=resales.reduce((a,x)=>a+x.amount,0),rq=resales.reduce((a,x)=>a+x.qty,0);
  $("invested").textContent=money(invested);$("periodSummary").textContent=bought+" créditos · "+purchases.length+" compras";
- $("stock").textContent=stock;$("creditsBought").textContent=bought;$("servers").textContent=uq+" Uniplay · "+gq+" GOAT";
+ $("stock").textContent=stock;$("stockServers").textContent=uniStock+" Uniplay · "+goatStock+" GOAT";$("creditsBought").textContent=bought;$("servers").textContent=uq+" Uniplay · "+gq+" GOAT";
  $("resellerRevenue").textContent=money(rr);$("resellerCredits").textContent=rq+" créditos repassados";
- const saving=uq*.5;$("saving").textContent=money(saving);
- $("reserveValue").textContent=money(reserve);let pct=Math.min(100,reserve/375*100);$("reserveBar").style.width=pct+"%";$("reserveText").textContent=reserve>=375?"Meta atingida · lote de 50 disponível":"Faltam "+money(375-reserve)+" para 50 créditos";
+ const optimizedUniCost=Math.floor(uq/100)*750+(uq%100>=50?375:Math.floor((uq%100)/20)*160+((uq%100)%20>=10?85:0)); const saving=Math.max(0,us-optimizedUniCost);$("saving").textContent=money(saving);$("savingText").textContent="com lotes de 50–100"; $("avgUni").textContent=money(uq?us/uq:0);$("buyPace").textContent=purchases.length?(bought/purchases.length).toLocaleString("pt-BR",{maximumFractionDigits:1}):"0";$("buyPaceText").textContent=purchases.length+" compras no mês";
+ $("reserveValue").textContent=money(reserve);let pct=Math.min(100,reserve/375*100);$("reserveBar").style.width=pct+"%";$("reservePercent").textContent=Math.round(pct)+"% da meta";$("reserveCredits").textContent=Math.floor(reserve/10)+" de 38 créditos";$("reserveText").textContent=reserve>=375?"Meta atingida · lote de 50 disponível":"Faltam "+money(375-reserve)+" para 50 créditos";
  $("uniBought").textContent=uq;$("goatBought").textContent=gq;$("uniSpent").textContent=money(us);$("goatSpent").textContent=money(gs);
  const total=Math.max(1,bought);$("uniLine").style.width=(uq/total*100)+"%";$("goatLine").style.width=(gq/total*100)+"%";
  const list=[...data].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
@@ -36,7 +36,7 @@ function render(){
  document.querySelectorAll(".tx").forEach(el=>el.onclick=()=>edit(el.dataset.id));
 }
 function openForm(type,item){
- $("sheetWrap").classList.add("show");$("type").value=type;$("editId").value=item?.id||"";$("date").value=item?.date||"2026-09-19";$("qty").value=item?.qty||"";$("amount").value=item?.amount||"";$("note").value=item?.note||"";$("server").value=item?.server||"Uniplay";$("reseller").value=item?.reseller||"Ranon";
+ $("sheetWrap").classList.add("show");$("type").value=type;$("editId").value=item?.id||"";$("date").value=item?.date||new Date().toLocaleDateString("en-CA");$("qty").value=item?.qty||"";$("amount").value=item?.amount||"";$("note").value=item?.note||"";$("server").value=item?.server||"Uniplay";$("reseller").value=item?.reseller||"Ranon";
  $("resellerLabel").classList.toggle("hidden",type!=="reseller");$("serverLabel").classList.toggle("hidden",type==="reseller");$("deleteBtn").classList.toggle("hidden",!item);
  $("formTitle").textContent=item?"Editar movimentação":type==="purchase"?"Nova compra":type==="reseller"?"Nova revenda":"Nova saída";
 }
