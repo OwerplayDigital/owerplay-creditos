@@ -6,49 +6,40 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="app">
-<header><div><span class="overline">OWERPLAY</span><h1>Créditos</h1></div><button class="iconbtn" id="settings">•••</button></header>
+<main class="app">
+<header><div><span class="overline">OWERPLAY</span><h1>Créditos</h1></div><span class="status">● Atualizado</span></header>
+
 <section class="balance glass">
-<div class="balanceTop"><span>Investido em setembro</span><span class="status">● Atualizado</span></div>
-<strong id="invested">R$ 0,00</strong><div class="sub" id="periodSummary"></div>
+<div class="balanceTop"><span>Investido em setembro</span><span>150 créditos comprados</span></div>
+<strong>R$ 1.170,00</strong>
+<small>120 Uniplay · 30 GOAT</small>
 </section>
-<section class="quick">
-<button class="quickBtn primary" data-open="purchase"><span>＋</span><b>Compra</b><small>Adicionar créditos</small></button>
-<button class="quickBtn" data-open="sale"><span>↗</span><b>Saída</b><small>Cliente / uso</small></button>
-<button class="quickBtn" data-open="reseller"><span>⇄</span><b>Revenda</b><small>Dayana / Ranon</small></button>
-</section>
-<div class="sectionTitle"><h2>Resumo</h2><span>Setembro 2026</span></div>
+
+<div class="sectionTitle"><h2>Controle desde 20/09</h2><span>1 renovação</span></div>
 <section class="stats">
-<article class="stat"><span>Estoque</span><strong id="stock">0</strong><small id="stockServers">créditos disponíveis*</small></article>
-<article class="stat"><span>Clientes</span><strong id="clientRevenue">R$ 0</strong><small id="clientCredits">0 créditos usados</small></article>
-<article class="stat"><span>Revendas</span><strong id="resellerRevenue">R$ 0</strong><small id="resellerCredits"></small></article>
-
+<article class="stat"><span>Recebido</span><strong>R$ 30</strong><small>clientes</small></article>
+<article class="stat"><span>Reposição</span><strong>R$ 10</strong><small>separado</small></article>
+<article class="stat"><span>Créditos</span><strong>1</strong><small>1 GOAT · 0 UNI</small></article>
 </section>
-<div class="sectionTitle"><h2>Caixa de reposição</h2><span>R$ 10 / crédito</span></div>
+
+<div class="sectionTitle"><h2>Caixa de reposição</h2><span>Meta R$ 445</span></div>
 <section class="reserve glass">
-<div class="reserveHead"><div><span>Guardado</span><strong id="reserveValue">R$ 0</strong></div><div class="goal"><span>Meta</span><b>R$ 375</b></div></div>
-<div class="progress"><i id="reserveBar"></i></div><div class="reserveFoot"><span id="reserveText"></span><button id="adjustReserve">Ajustar</button></div>
+<div class="reserveHead"><div><span>Guardado</span><strong>R$ 10,00</strong></div><div class="goal"><span>Falta</span><b>R$ 435,00</b></div></div>
+<div class="progress"><i style="width:2.25%"></i></div>
+<div class="reserveFoot"><span>Meta: 50 Uniplay + 10 GOAT</span></div>
 </section>
-<div class="sectionTitle"><h2>Últimas movimentações</h2></div>
-<section id="transactions" class="transactions"></section>
-<p class="footnote">* Estoque é estimado pelas movimentações registradas. Cadastre as saídas de clientes para mantê-lo exato.</p>
-</div>
 
-<div class="sheetWrap" id="sheetWrap"><div class="backdrop" id="backdrop"></div><form class="sheet" id="form">
-<div class="handle"></div><div class="sheetHead"><div><span class="overline" id="formOverline">NOVA MOVIMENTAÇÃO</span><h2 id="formTitle">Adicionar</h2></div><button type="button" class="close" id="close">×</button></div>
-<input type="hidden" id="editId"><input type="hidden" id="type">
-<label>Data<input id="date" type="date" required></label>
-<label id="serverLabel">Servidor<select id="server"><option>Uniplay</option><option>GOAT</option></select></label>
-<label id="resellerLabel" class="hidden">Revendedor<select id="reseller"><option>Ranon</option><option>Dayana</option></select></label>
-<div class="two"><label>Quantidade<input id="qty" type="number" min="1" inputmode="numeric" required></label><label>Valor total<input id="amount" type="number" min="0" step=".01" inputmode="decimal" required></label></div>
-<label>Observação<input id="note" placeholder="Opcional"></label>
-<button class="save" type="submit">Salvar movimentação</button><button class="delete hidden" id="deleteBtn" type="button">Excluir</button>
-</form></div>
+<div class="sectionTitle"><h2>Revendas</h2><span>40 créditos</span></div>
+<section class="glass compact">
+<div class="summaryRow"><span>Dayana · 20 Uniplay</span><b>R$ 180</b></div>
+<div class="summaryRow"><span>Ranon · 20 Uniplay</span><b>R$ 200</b></div>
+<div class="summaryRow total"><span>Total</span><b>R$ 380</b></div>
+</section>
 
-<div class="sheetWrap" id="reserveSheet"><div class="backdrop reserveBackdrop"></div><form class="sheet" id="reserveForm">
-<div class="handle"></div><div class="sheetHead"><div><span class="overline">CAIXA DE REPOSIÇÃO</span><h2>Ajustar saldo</h2></div><button type="button" class="close reserveClose">×</button></div>
-<label>Valor guardado<input id="reserveInput" type="number" min="0" step=".01" inputmode="decimal"></label>
-<p class="helper">A regra é separar R$ 10 por crédito vendido. Você pode ajustar o saldo real a qualquer momento.</p>
-<button class="save" type="submit">Salvar saldo</button></form></div>
-<script src="app.js"></script>
+<div class="sectionTitle"><h2>Últimas renovações</h2><span>20/09/2026</span></div>
+<section class="transactions">
+<div class="tx"><div class="txIcon goat">↗</div><div><b>Fernando</b><small>GOAT · 1 crédito · R$ 10 reposição</small></div><div class="txAmount"><b>R$ 30</b><small>20/09</small></div></div>
+</section>
+<p class="footnote">Painel somente para consulta. Os lançamentos são atualizados por aqui conforme você me passa as movimentações.</p>
+</main>
 </body></html>
