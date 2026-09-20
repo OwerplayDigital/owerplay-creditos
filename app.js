@@ -25,13 +25,13 @@ function render(){
  const uniOut=resales.reduce((a,x)=>a+x.qty,0)+sales.filter(x=>x.server==="Uniplay").reduce((a,x)=>a+x.qty,0),goatOut=sales.filter(x=>x.server==="GOAT").reduce((a,x)=>a+x.qty,0); const uniStock=uq-uniOut,goatStock=gq-goatOut,stock=uniStock+goatStock;
  const rr=resales.reduce((a,x)=>a+x.amount,0),rq=resales.reduce((a,x)=>a+x.qty,0);
  $("invested").textContent=money(invested);$("periodSummary").textContent=bought+" créditos · "+purchases.length+" compras";
- $("stock").textContent=stock;$("stockServers").textContent=uniStock+" Uniplay · "+goatStock+" GOAT";$("creditsBought").textContent=bought;$("servers").textContent=uq+" Uniplay · "+gq+" GOAT";
+ $("stock").textContent=stock;$("stockServers").textContent="créditos disponíveis*";$("creditsBought").textContent=bought;$("servers").textContent="créditos no mês";
  $("resellerRevenue").textContent=money(rr);$("resellerCredits").textContent=rq+" créditos repassados";
- const optimizedUniCost=Math.floor(uq/100)*750+(uq%100>=50?375:Math.floor((uq%100)/20)*160+((uq%100)%20>=10?85:0)); const saving=Math.max(0,us-optimizedUniCost);$("saving").textContent=money(saving);$("savingText").textContent="com lotes de 50–100"; $("avgUni").textContent=money(uq?us/uq:0);$("buyPace").textContent=purchases.length?(bought/purchases.length).toLocaleString("pt-BR",{maximumFractionDigits:1}):"0";$("buyPaceText").textContent=purchases.length+" compras no mês";
- $("reserveValue").textContent=money(reserve);let pct=Math.min(100,reserve/375*100);$("reserveBar").style.width=pct+"%";$("reservePercent").textContent=Math.round(pct)+"% da meta";$("reserveCredits").textContent=Math.floor(reserve/10)+" de 38 créditos";$("reserveText").textContent=reserve>=375?"Meta atingida · lote de 50 disponível":"Faltam "+money(375-reserve)+" para 50 créditos";
+ 
+ $("reserveValue").textContent=money(reserve);let pct=Math.min(100,reserve/375*100);$("reserveBar").style.width=pct+"%";$("reserveText").textContent=reserve>=375?"Meta atingida · lote de 50 disponível":"Faltam "+money(375-reserve)+" para 50 créditos";
  $("uniBought").textContent=uq;$("goatBought").textContent=gq;$("uniSpent").textContent=money(us);$("goatSpent").textContent=money(gs);
  const total=Math.max(1,bought);$("uniLine").style.width=(uq/total*100)+"%";$("goatLine").style.width=(gq/total*100)+"%";
- const list=[...data].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+ const list=[...data].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
  $("transactions").innerHTML=list.map(x=>{let title=x.type==="purchase"?"Compra "+x.server:x.type==="reseller"?"Revenda · "+x.reseller:"Saída · "+x.server;let cls=x.type==="reseller"?"reseller":x.server==="GOAT"?"goat":"";let sign=x.type==="purchase"?"−":"+";return '<div class="tx" data-id="'+x.id+'"><div class="txIcon '+cls+'">'+(x.type==="purchase"?"↓":x.type==="reseller"?"⇄":"↗")+'</div><div><b>'+title+'</b><small>'+fmt(x.date)+' · '+x.qty+' créditos</small></div><div class="txAmount"><b>'+sign+" "+money(x.amount)+'</b><small>'+x.server+'</small></div></div>'}).join("");
  document.querySelectorAll(".tx").forEach(el=>el.onclick=()=>edit(el.dataset.id));
 }
