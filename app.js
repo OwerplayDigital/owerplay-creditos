@@ -25,7 +25,7 @@ function render(){
  const uniOut=resales.reduce((a,x)=>a+x.qty,0)+sales.filter(x=>x.server==="Uniplay").reduce((a,x)=>a+x.qty,0),goatOut=sales.filter(x=>x.server==="GOAT").reduce((a,x)=>a+x.qty,0); const uniStock=uq-uniOut,goatStock=gq-goatOut,stock=uniStock+goatStock;
  const rr=resales.reduce((a,x)=>a+x.amount,0),rq=resales.reduce((a,x)=>a+x.qty,0);
  $("invested").textContent=money(invested);$("periodSummary").textContent=bought+" créditos · "+purchases.length+" compras";
- $("stock").textContent=stock;$("stockServers").textContent="créditos disponíveis*";$("creditsBought").textContent=bought;$("servers").textContent="créditos no mês";
+ $("stock").textContent=stock;$("stockServers").textContent="créditos disponíveis*";const clientRevenue=sales.reduce((a,x)=>a+x.amount,0),clientCredits=sales.reduce((a,x)=>a+x.qty,0);$("clientRevenue").textContent=money(clientRevenue);$("clientCredits").textContent=clientCredits+" créditos usados";
  $("resellerRevenue").textContent=money(rr);$("resellerCredits").textContent=rq+" créditos repassados";
  
  $("reserveValue").textContent=money(reserve);let pct=Math.min(100,reserve/375*100);$("reserveBar").style.width=pct+"%";$("reserveText").textContent=reserve>=375?"Meta atingida · lote de 50 disponível":"Faltam "+money(375-reserve)+" para 50 créditos";
