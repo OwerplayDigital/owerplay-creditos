@@ -1,5 +1,6 @@
 const KEY="owerplay-creditos-v1",RESERVE="owerplay-reserve-v1";
 const seed=[
+{id:"s1",type:"sale",date:"2026-09-20",server:"GOAT",qty:1,amount:30,note:"Fernando"},
 {id:"p1",type:"purchase",date:"2026-09-02",server:"Uniplay",qty:20,amount:160,note:""},
 {id:"p2",type:"purchase",date:"2026-09-02",server:"GOAT",qty:10,amount:70,note:""},
 {id:"p3",type:"purchase",date:"2026-09-05",server:"Uniplay",qty:20,amount:160,note:""},
@@ -15,6 +16,8 @@ const seed=[
 ];
 let data=JSON.parse(localStorage.getItem(KEY)||"null")||seed;
 let reserve=Number(localStorage.getItem(RESERVE)||0);
+// Primeiro registro do novo controle: Fernando / GOAT / R$30 / R$10 reposição.
+if(!localStorage.getItem("owerplay-20260920-migrated")){if(!data.some(x=>x.id==="s1"))data.push({id:"s1",type:"sale",date:"2026-09-20",server:"GOAT",qty:1,amount:30,note:"Fernando"});reserve+=10;localStorage.setItem(RESERVE,reserve);localStorage.setItem("owerplay-20260920-migrated","1");localStorage.setItem(KEY,JSON.stringify(data));}
 const $=id=>document.getElementById(id),money=n=>n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"}),fmt=d=>d.split("-").reverse().slice(0,2).join("/");
 function persist(){localStorage.setItem(KEY,JSON.stringify(data))}
 function render(){
@@ -32,7 +35,7 @@ function render(){
  $("uniBought").textContent=uq;$("goatBought").textContent=gq;$("uniSpent").textContent=money(us);$("goatSpent").textContent=money(gs);
  const total=Math.max(1,bought);$("uniLine").style.width=(uq/total*100)+"%";$("goatLine").style.width=(gq/total*100)+"%";
  const list=[...data].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
- $("transactions").innerHTML=list.map(x=>{let title=x.type==="purchase"?"Compra "+x.server:x.type==="reseller"?"Revenda · "+x.reseller:"Saída · "+x.server;let cls=x.type==="reseller"?"reseller":x.server==="GOAT"?"goat":"";let sign=x.type==="purchase"?"−":"+";return '<div class="tx" data-id="'+x.id+'"><div class="txIcon '+cls+'">'+(x.type==="purchase"?"↓":x.type==="reseller"?"⇄":"↗")+'</div><div><b>'+title+'</b><small>'+fmt(x.date)+' · '+x.qty+' créditos</small></div><div class="txAmount"><b>'+sign+" "+money(x.amount)+'</b><small>'+x.server+'</small></div></div>'}).join("");
+ $("transactions").innerHTML=list.map(x=>{let title=x.type==="purchase"?"Compra "+x.server:x.type==="reseller"?"Revenda · "+x.reseller:(x.note?x.note+" · ":"Saída · ")+x.server;let cls=x.type==="reseller"?"reseller":x.server==="GOAT"?"goat":"";let sign=x.type==="purchase"?"−":"+";return '<div class="tx" data-id="'+x.id+'"><div class="txIcon '+cls+'">'+(x.type==="purchase"?"↓":x.type==="reseller"?"⇄":"↗")+'</div><div><b>'+title+'</b><small>'+fmt(x.date)+' · '+x.qty+' créditos</small></div><div class="txAmount"><b>'+sign+" "+money(x.amount)+'</b><small>'+x.server+'</small></div></div>'}).join("");
  document.querySelectorAll(".tx").forEach(el=>el.onclick=()=>edit(el.dataset.id));
 }
 function openForm(type,item){
