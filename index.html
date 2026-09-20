@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07090e"><title>OwerPlay Créditos</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<header><div><span class="overline">OWERPLAY</span><h1>Créditos</h1></div><button class="iconbtn" id="settings">•••</button></header>
+<section class="balance glass">
+<div class="balanceTop"><span>Investido em setembro</span><span class="status">● Atualizado</span></div>
+<strong id="invested">R$ 0,00</strong><div class="sub" id="periodSummary"></div>
+</section>
+<section class="quick">
+<button class="quickBtn primary" data-open="purchase"><span>＋</span><b>Compra</b><small>Adicionar créditos</small></button>
+<button class="quickBtn" data-open="sale"><span>↗</span><b>Saída</b><small>Cliente / uso</small></button>
+<button class="quickBtn" data-open="reseller"><span>⇄</span><b>Revenda</b><small>Dayana / Ranon</small></button>
+</section>
+<div class="sectionTitle"><h2>Visão geral</h2><span>Setembro 2026</span></div>
+<section class="stats">
+<article class="stat"><span>Estoque estimado</span><strong id="stock">0</strong><small>créditos disponíveis*</small></article>
+<article class="stat"><span>Comprados</span><strong id="creditsBought">0</strong><small id="servers"></small></article>
+<article class="stat"><span>Revendas</span><strong id="resellerRevenue">R$ 0</strong><small id="resellerCredits"></small></article>
+<article class="stat accent"><span>Economia potencial</span><strong id="saving">R$ 0</strong><small>vs. lotes de 20</small></article>
+</section>
+<div class="sectionTitle"><h2>Caixa de reposição</h2><span>R$ 10 / crédito</span></div>
+<section class="reserve glass">
+<div class="reserveHead"><div><span>Guardado</span><strong id="reserveValue">R$ 0</strong></div><div class="goal"><span>Meta</span><b>R$ 375</b></div></div>
+<div class="progress"><i id="reserveBar"></i></div><div class="reserveFoot"><span id="reserveText"></span><button id="adjustReserve">Ajustar</button></div>
+</section>
+<div class="sectionTitle"><h2>Servidores</h2><span>Distribuição</span></div>
+<section class="serversCard glass">
+<div class="serverRow"><div class="serverName"><i class="dot uni"></i><div><b>Uniplay</b><small>Principal</small></div></div><div class="serverVal"><b id="uniBought">0</b><small id="uniSpent">R$ 0</small></div></div>
+<div class="line"><i id="uniLine"></i></div>
+<div class="serverRow"><div class="serverName"><i class="dot goat"></i><div><b>GOAT</b><small>Operação própria</small></div></div><div class="serverVal"><b id="goatBought">0</b><small id="goatSpent">R$ 0</small></div></div>
+<div class="line"><i id="goatLine"></i></div>
+</section>
+<div class="sectionTitle"><h2>Movimentações</h2><button id="seeAll">Ver todas</button></div>
+<section id="transactions" class="transactions"></section>
+<p class="footnote">* Estoque é estimado pelas movimentações registradas. Cadastre as saídas de clientes para mantê-lo exato.</p>
+</div>
+
+<div class="sheetWrap" id="sheetWrap"><div class="backdrop" id="backdrop"></div><form class="sheet" id="form">
+<div class="handle"></div><div class="sheetHead"><div><span class="overline" id="formOverline">NOVA MOVIMENTAÇÃO</span><h2 id="formTitle">Adicionar</h2></div><button type="button" class="close" id="close">×</button></div>
+<input type="hidden" id="editId"><input type="hidden" id="type">
+<label>Data<input id="date" type="date" required></label>
+<label id="serverLabel">Servidor<select id="server"><option>Uniplay</option><option>GOAT</option></select></label>
+<label id="resellerLabel" class="hidden">Revendedor<select id="reseller"><option>Ranon</option><option>Dayana</option></select></label>
+<div class="two"><label>Quantidade<input id="qty" type="number" min="1" inputmode="numeric" required></label><label>Valor total<input id="amount" type="number" min="0" step=".01" inputmode="decimal" required></label></div>
+<label>Observação<input id="note" placeholder="Opcional"></label>
+<button class="save" type="submit">Salvar movimentação</button><button class="delete hidden" id="deleteBtn" type="button">Excluir</button>
+</form></div>
+
+<div class="sheetWrap" id="reserveSheet"><div class="backdrop reserveBackdrop"></div><form class="sheet" id="reserveForm">
+<div class="handle"></div><div class="sheetHead"><div><span class="overline">CAIXA DE REPOSIÇÃO</span><h2>Ajustar saldo</h2></div><button type="button" class="close reserveClose">×</button></div>
+<label>Valor guardado<input id="reserveInput" type="number" min="0" step=".01" inputmode="decimal"></label>
+<p class="helper">A regra é separar R$ 10 por crédito vendido. Você pode ajustar o saldo real a qualquer momento.</p>
+<button class="save" type="submit">Salvar saldo</button></form></div>
+<script src="app.js"></script>
+</body></html>
