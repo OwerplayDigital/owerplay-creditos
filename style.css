@@ -4,3 +4,6 @@
 
 /* Compact server cards; emphasize reserve */
 .server{min-height:185px!important;padding:18px 20px!important;margin-bottom:12px!important;border-radius:23px!important}.server .balance{font-size:50px!important;margin-top:22px!important}.serverTop .mark{width:42px!important;height:42px!important;border-radius:13px!important}.server h2{font-size:20px!important}.cash{min-height:132px!important;padding:25px 22px!important}.cash .money{font-size:38px!important}.cashIcon{width:62px!important;height:62px!important;border-radius:19px!important}
+
+/* Server brand marks + stronger reserve card */
+.mark svg{width:30px;height:30px;display:block}.uniMark{background:linear-gradient(145deg,#1fb8e9,#dff9ff)!important;color:#17334f!important}.goatMark{background:#171c24!important;color:#f58227!important}.cash{min-height:160px!important;background:linear-gradient(135deg,#087a4e,#12a96c)!important;border-color:#18bd7c!important;color:#fff!important;box-shadow:0 14px 32px rgba(8,122,78,.22)!important}.cash .label{color:rgba(255,255,255,.72)!important}.cash .money{font-size:42px!important;color:#fff!important}.cashIcon{width:68px!important;height:68px!important;background:rgba(255,255,255,.16)!important;color:#fff!important;border:1px solid rgba(255,255,255,.2)}
